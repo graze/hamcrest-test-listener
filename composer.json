@@ -1,0 +1,42 @@
+{
+    "name": "graze/hamcrest-test-listener",
+
+    "description": ":crescent_moon: A PHPUnit test listener for the hamcrest assertion library.",
+
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Samuel Parkinson",
+            "email": "sam@graze.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "Hamcrest\\Adapter\\PHPUnit\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "classmap": [
+            "tests/unit/"
+        ]
+    },
+
+    "require": {
+        "php": ">= 5.6",
+        "phpunit/phpunit": ">=3.3.3 <6.0.0",
+        "hamcrest/hamcrest-php": "^1.0"
+    },
+
+    "require-dev": {
+        "mockery/mockery": "^0.9.4"
+    },
+
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit --colors=always --testsuite unit"
+        ]
+    }
+}

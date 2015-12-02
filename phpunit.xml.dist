@@ -1,0 +1,18 @@
+<phpunit colors="true" verbose="true">
+
+    <!-- Test suites -->
+    <testsuites>
+
+        <testsuite name="unit">
+            <directory>tests/unit/</directory>
+        </testsuite>
+
+    </testsuites>
+
+    <listeners>
+
+        <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
+
+    </listeners>
+
+</phpunit>
