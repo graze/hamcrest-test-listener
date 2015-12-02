@@ -32,7 +32,7 @@ A PHPUnit test listener for the hamcrest assertion library.
 [license]: https://github.com/graze/hamcrest-test-listener/blob/master/LICENSE
 
 <!-- Images -->
-[ico-license]: https://img.shields.io/packagist/l/graze/formatter.svg
-[ico-package]: https://img.shields.io/packagist/v/graze/formatter.svg
-[ico-build]: https://img.shields.io/travis/graze/formatter/master.svg
+[ico-license]: https://img.shields.io/packagist/l/graze/hamcrest-test-listener.svg
+[ico-package]: https://img.shields.io/packagist/v/graze/hamcrest-test-listener.svg
+[ico-build]: https://img.shields.io/travis/graze/hamcrest-test-listener/master.svg
 [ico-engine]: https://img.shields.io/badge/php-%3E%3D5.6-8892BF.svg
