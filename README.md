@@ -7,10 +7,22 @@
 
 A PHPUnit test listener for the hamcrest assertion library.
 
-It can be installed in whichever way you prefer, but we recommend [Composer][package].
+## Installation
 
 ```bash
 ~$ composer require graze/hamcrest-test-listener
+```
+
+## Usage
+
+ In your **phpunit.xml** file, add the following:
+
+```xml
+<phpunit>
+    <listeners>
+        <listener class="\Hamcrest\Adapter\PHPUnit\TestListener"></listener>
+    </listeners>
+</phpunit>
 ```
 
 <!-- Links -->
