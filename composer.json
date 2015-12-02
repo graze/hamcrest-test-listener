@@ -32,11 +32,5 @@
 
     "require-dev": {
         "mockery/mockery": "^0.9.4"
-    },
-
-    "scripts": {
-        "test": [
-            "vendor/bin/phpunit --colors=always --testsuite unit"
-        ]
     }
 }

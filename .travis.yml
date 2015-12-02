@@ -16,4 +16,4 @@ install:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
 script:
-  - composer test --quiet
+  - vendor/bin/phpunit --testsuite unit
