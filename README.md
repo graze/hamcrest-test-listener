@@ -10,7 +10,7 @@ A PHPUnit test listener for the hamcrest assertion library.
 ## Installation
 
 ```bash
-~$ composer require graze/hamcrest-test-listener
+~$ composer require --dev graze/hamcrest-test-listener
 ```
 
 ## Usage
