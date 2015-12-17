@@ -50,9 +50,12 @@ class TestListener implements \PHPUnit_Framework_TestListener
     {
     }
 
-    public function addWarning(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_Warning $e, $time)
-    {
-    }
+    /**
+     * @see https://github.com/sebastianbergmann/phpunit/commit/073c4de6d013353df368ccb25f9de37f13f61d2d
+     */
+    // public function addWarning(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_Warning $e, $time)
+    // {
+    // }
 
     public function addFailure(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_AssertionFailedError $e, $time)
     {

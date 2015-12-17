@@ -30,7 +30,11 @@
         "hamcrest/hamcrest-php": "^1.2"
     },
 
+    "conflict": {
+        "phpunit/phpunit": "5.1.0"
+    },
+
     "require-dev": {
-        "mockery/mockery": "dev-master#9c29a2"
+        "mockery/mockery": "^0.9.4"
     }
 }
