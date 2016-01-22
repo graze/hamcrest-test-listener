@@ -1,7 +1,7 @@
 {
     "name": "graze/hamcrest-test-listener",
 
-    "description": ":ear: A PHPUnit test listener for the hamcrest assertion library.",
+    "description": "A PHPUnit test listener for the hamcrest assertion library.",
 
     "license": "MIT",
 
