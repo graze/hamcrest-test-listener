@@ -8,14 +8,11 @@ SHELL = /bin/sh
 install: ## Download the depenedencies then build the image :rocket:.
 	docker pull php:5.6-cli
 	docker pull php:7.0-cli
-	make 'composer-install --optimize-autoloader --ignore-platform-reqs'
-
-composer-%: ## Run a composer command, `make "composer-<command> [...]"`.
 	docker run -it --rm \
-	-v $$(pwd):/app \
-	-v ~/.composer:/root/composer \
-	-v ~/.ssh:/root/.ssh:ro \
-	composer/composer --no-interaction $*
+		-v $$(pwd):/usr/src/app \
+		-v ~/.composer:/root/.composer \
+		-v ~/.ssh:/root/.ssh:ro \
+		graze/composer update --no-interaction
 
 test: ## Run the unit and intergration testsuites.
 test: test-unit
