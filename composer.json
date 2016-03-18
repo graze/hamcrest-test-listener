@@ -27,7 +27,7 @@
     "require": {
         "php": "^5.5 || ^7.0",
         "phpunit/phpunit": "^3.3.3 || ^4.0 || ^5.0",
-        "hamcrest/hamcrest-php": "^1.2"
+        "hamcrest/hamcrest-php": "^2.0"
     },
 
     "conflict": {
@@ -35,6 +35,6 @@
     },
 
     "require-dev": {
-        "mockery/mockery": "^0.9.4"
+        "mockery/mockery": "dev-master"
     }
 }

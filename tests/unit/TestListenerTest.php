@@ -14,9 +14,16 @@
 
 use Hamcrest\Adapter\PHPUnit\TestListener;
 use Hamcrest\MatcherAssert;
+use Hamcrest\Util;
 
 class TestListenerTest extends \PHPUnit_Framework_TestCase
 {
+    public static function setUpBeforeClass()
+    {
+        // Require the Hamcrest global functions.
+        Util::registerGlobalFunctions();
+    }
+
     public function testShouldResetAssertionCountOnTestStart()
     {
         $listener = new TestListener();
