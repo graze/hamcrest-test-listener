@@ -15,65 +15,26 @@
 namespace Hamcrest\Adapter\PHPUnit;
 
 use Hamcrest\MatcherAssert;
+use PHPUnit\Framework\BaseTestListener;
+use PHPUnit\Framework\Test;
+use PHPUnit\Framework\TestCase;
 
-class TestListener implements \PHPUnit_Framework_TestListener
+class TestListener extends BaseTestListener
 {
-    /**
-     * @param PHPUnit_Framework_Test $test
-     */
-    public function startTest(\PHPUnit_Framework_Test $test)
+    public function startTest(Test $test)
     {
         MatcherAssert::resetCount();
     }
 
-    /**
-     * @param PHPUnit_Framework_Test $test
-     * @param float $time
-     */
-    public function endTest(\PHPUnit_Framework_Test $test, $time)
+    public function endTest(Test $test, $time)
     {
         try {
-            if ($test instanceof \PHPUnit_Framework_TestCase) {
+            if ($test instanceof TestCase) {
                 $test->addToAssertionCount(MatcherAssert::getCount());
             }
         } catch (\Exception $e) {
             $result = $test->getTestResultObject();
             $result->addError($test, $e, $time);
         }
-    }
-
-    public function startTestSuite(\PHPUnit_Framework_TestSuite $suite)
-    {
-    }
-
-    public function addError(\PHPUnit_Framework_Test $test, \Exception $e, $time)
-    {
-    }
-
-    /**
-     * @see https://github.com/sebastianbergmann/phpunit/commit/073c4de6d013353df368ccb25f9de37f13f61d2d
-     */
-    // public function addWarning(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_Warning $e, $time)
-    // {
-    // }
-
-    public function addFailure(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_AssertionFailedError $e, $time)
-    {
-    }
-
-    public function addIncompleteTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
-    {
-    }
-
-    public function addSkippedTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
-    {
-    }
-
-    public function addRiskyTest(\PHPUnit_Framework_Test $test, \Exception $e, $time)
-    {
-    }
-
-    public function endTestSuite(\PHPUnit_Framework_TestSuite $suite)
-    {
     }
 }
