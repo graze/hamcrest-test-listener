@@ -27,9 +27,6 @@
     </logging>
 
     <listeners>
-
-        <listener class="\Mockery\Adapter\Phpunit\TestListener"></listener>
-
         <!-- A basic integration test. -->
         <listener class="\Hamcrest\Adapter\PHPUnit\TestListener"></listener>
 
