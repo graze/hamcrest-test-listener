@@ -4,6 +4,12 @@ A PHPUnit test listener for the hamcrest assertion library.
 
 ## Installation
 
+NOTE:
+
+For PHPUnit >= 6, please use version >= 3.0
+
+For PHPUnit < 6, please use version < 3.0
+
 ```bash
 ~$ composer require --dev graze/hamcrest-test-listener
 ```
@@ -13,7 +19,9 @@ A PHPUnit test listener for the hamcrest assertion library.
  In your **phpunit.xml** file, add the following:
 
 ```xml
-<phpunit>
+<phpunit
+    beStrictAboutTestsThatDoNotTestAnything="false"> <!-- PHPUnit will not consider Hamcrest assertions -->
+    
     <listeners>
         <listener class="\Hamcrest\Adapter\PHPUnit\TestListener"></listener>
     </listeners>
