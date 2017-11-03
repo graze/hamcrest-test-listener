@@ -28,7 +28,7 @@
 
     <listeners>
         <!-- A basic integration test. -->
-        <listener class="\Hamcrest\Adapter\PHPUnit\TestListener"></listener>
+        <listener class="\Hamcrest\Adapter\PHPUnit\TestListener"/>
 
     </listeners>
 
