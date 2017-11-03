@@ -15,14 +15,12 @@
 namespace Hamcrest\Adapter\PHPUnit;
 
 use Hamcrest\MatcherAssert;
+use PHPUnit\Framework\BaseTestListener;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\TestListenerDefaultImplementation;
 
-class TestListener implements \PHPUnit\Framework\TestListener
+class TestListener extends BaseTestListener
 {
-    use TestListenerDefaultImplementation;
-
     /**
      * @param Test $test
      */

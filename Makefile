@@ -4,6 +4,7 @@ DOCKER ?= $(shell which docker)
 VOLUME := /srv
 IMAGE ?= graze/php-alpine:test
 DOCKER_RUN := ${DOCKER} run --rm -t -v $$(pwd):${VOLUME} -w ${VOLUME} ${IMAGE}
+PREFER_LOWEST ?=
 
 .PHONY: build build-update composer-% clean help
 .PHONY: test lint lint-fix test-unit test-coverage
@@ -37,9 +38,18 @@ lint-fix: ## Run phpcsf and fix possible lint errors.
 test-unit: ## Run the unit testsuite.
 	${DOCKER_RUN} vendor/bin/phpunit --testsuite unit
 
+test-lowest: ## Test using the lowest possible versions of the dependencies
+test-lowest: PREFER_LOWEST=--prefer-lowest --prefer-stable
+test-lowest: build-update test
+
 test-matrix: ## Run the unit tests against multiple targets.
 	${MAKE} IMAGE="php:7.0-alpine" test
 	${MAKE} IMAGE="php:7.1-alpine" test
+
+test-matrix-lowest: ## Run the unit tests against
+	${MAKE} build-update PREFER_LOWEST='--prefer-lowest --prefer-stable'
+	${MAKE} test-matrix
+	${MAKE} build-update
 
 test-coverage: ## Run all tests and output coverage to the console.
 	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-text
