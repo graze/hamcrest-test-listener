@@ -38,10 +38,8 @@ test-unit: ## Run the unit testsuite.
 	${DOCKER_RUN} vendor/bin/phpunit --testsuite unit
 
 test-matrix: ## Run the unit tests against multiple targets.
-	${MAKE} IMAGE="php:5.6-alpine" test
 	${MAKE} IMAGE="php:7.0-alpine" test
 	${MAKE} IMAGE="php:7.1-alpine" test
-	${MAKE} IMAGE="hhvm/hhvm:latest" test
 
 test-coverage: ## Run all tests and output coverage to the console.
 	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-text
