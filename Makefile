@@ -1,31 +1,50 @@
 SHELL = /bin/sh
 
-.PHONY: install composer clean help
-.PHONY: test test-unit test-coverage
+DOCKER ?= $(shell which docker)
+VOLUME := /srv
+IMAGE ?= graze/php-alpine:test
+DOCKER_RUN := ${DOCKER} run --rm -t -v $$(pwd):${VOLUME} -w ${VOLUME} ${IMAGE}
+
+.PHONY: build build-update composer-% clean help
+.PHONY: test lint lint-fix test-unit test-coverage
 
 .SILENT: help
 
-install: ## Download the depenedencies then build the image :rocket:.
-	docker pull php:5.6-cli
-	docker pull php:7.0-cli
-	docker run -it --rm \
-		-v $$(pwd):/usr/src/app \
-		-v ~/.composer:/root/.composer \
-		-v ~/.ssh:/root/.ssh:ro \
-		graze/composer update --no-interaction
 
-test: ## Run the unit and intergration testsuites.
-test: test-unit
+build: ## Download the dependencies then build the image :rocket:.
+	make 'composer-install --prefer-dist --optimize-autoloader'
+
+build-update: ## Update all dependencies
+	make 'composer-update --prefer-dist --optimize-autoloader ${PREFER_LOWEST}'
+
+composer-%: ## Run a composer command, `make "composer-<command> [...]"`.
+	${DOCKER} run -t --rm \
+        -v $$(pwd):/app \
+        -v ~/.composer:/tmp \
+        composer --ansi --no-interaction $* $(filter-out $@,$(MAKECMDGOALS))
+
+# Testing
+
+test: ## Run the unit and integration testsuites.
+test: lint test-unit
+
+lint: ## Run phpcs against the code.
+	${DOCKER_RUN} vendor/bin/phpcs -p --warning-severity=0 src/ tests/
+
+lint-fix: ## Run phpcsf and fix possible lint errors.
+	${DOCKER_RUN} vendor/bin/phpcbf -p src/ tests/
 
 test-unit: ## Run the unit testsuite.
-	docker run --rm -t -v $$(pwd):/opt/graze/queue -w /opt/graze/queue php:5.6-cli \
-	vendor/bin/phpunit --testsuite unit
-	docker run --rm -t -v $$(pwd):/opt/graze/queue -w /opt/graze/queue php:7.0-cli \
-	vendor/bin/phpunit --testsuite unit
+	${DOCKER_RUN} vendor/bin/phpunit --testsuite unit
 
-test-coverage: ## Run the testsuites with coverage enabled.
-	docker run --rm -t -v $$(pwd):/opt/graze/queue -w /opt/graze/queue php:5.6-cli \
-	vendor/bin/phpunit --coverage-text --testsuite unit
+test-matrix: ## Run the unit tests against multiple targets.
+	${MAKE} IMAGE="php:5.6-alpine" test
+	${MAKE} IMAGE="php:7.0-alpine" test
+	${MAKE} IMAGE="php:7.1-alpine" test
+	${MAKE} IMAGE="hhvm/hhvm:latest" test
+
+test-coverage: ## Run all tests and output coverage to the console.
+	${DOCKER_RUN} phpdbg7 -qrr vendor/bin/phpunit --coverage-text
 
 clean: ## Stop running containers and clean up an images.
 	rm -rf vendor/

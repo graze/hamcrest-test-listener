@@ -23,7 +23,7 @@ For PHPUnit < 6, please use version < 3.0
     beStrictAboutTestsThatDoNotTestAnything="false"> <!-- PHPUnit will not consider Hamcrest assertions -->
     
     <listeners>
-        <listener class="\Hamcrest\Adapter\PHPUnit\TestListener"></listener>
+        <listener class="\Hamcrest\Adapter\PHPUnit\TestListener"/>
     </listeners>
 </phpunit>
 ```
