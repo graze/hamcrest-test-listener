@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  *
  * @license https://github.com/graze/hamcrest-test-listener/blob/master/LICENSE MIT
- * @link https://github.com/graze/hamcrest-test-listener
+ * @link    https://github.com/graze/hamcrest-test-listener
  */
 
 namespace Hamcrest\Adapter\PHPUnit;
@@ -21,11 +21,18 @@ use PHPUnit\Framework\TestCase;
 
 class TestListener extends BaseTestListener
 {
+    /**
+     * @param Test $test
+     */
     public function startTest(Test $test)
     {
         MatcherAssert::resetCount();
     }
 
+    /**
+     * @param Test  $test
+     * @param float $time
+     */
     public function endTest(Test $test, $time)
     {
         try {
