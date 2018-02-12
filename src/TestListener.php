@@ -15,16 +15,19 @@
 namespace Hamcrest\Adapter\PHPUnit;
 
 use Hamcrest\MatcherAssert;
-use PHPUnit\Framework\BaseTestListener;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestListener as BaseTestListener;
+use PHPUnit\Framework\TestListenerDefaultImplementation;
 
-class TestListener extends BaseTestListener
+class TestListener implements BaseTestListener
 {
+    use TestListenerDefaultImplementation;
+
     /**
      * @param Test $test
      */
-    public function startTest(Test $test)
+    public function startTest(Test $test): void
     {
         MatcherAssert::resetCount();
     }
@@ -33,7 +36,7 @@ class TestListener extends BaseTestListener
      * @param Test  $test
      * @param float $time
      */
-    public function endTest(Test $test, $time)
+    public function endTest(Test $test, float $time): void
     {
         try {
             if ($test instanceof TestCase) {

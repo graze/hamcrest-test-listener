@@ -7,8 +7,8 @@
 
     "authors": [
         {
-            "name": "Samuel Parkinson",
-            "email": "sam@graze.com"
+            "name": "Graze Developers",
+            "email": "developers@graze.com"
         }
     ],
 
@@ -25,8 +25,8 @@
     },
 
     "require": {
-        "php": "^7.0",
-        "phpunit/phpunit": "^6.0",
+        "php": "^7",
+        "phpunit/phpunit": "^7",
         "hamcrest/hamcrest-php": "^2.0",
         "graze/standards": "^2.0",
         "squizlabs/php_codesniffer": "^3"
@@ -37,6 +37,6 @@
     },
 
     "require-dev": {
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "^1"
     }
 }
